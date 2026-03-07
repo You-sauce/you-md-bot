@@ -1,7 +1,6 @@
 //const fetch = require("node-fetch");
 const config = require('../config');
 const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, sleep, fetchJson} = require('../lib/function');
-const fancy = require('../lib/style');
 const axios = require("axios");
 const FormData = require("form-data");
 const fs = require("fs");
@@ -10,60 +9,6 @@ const path = require("path");
 const { cmd } = require("../command");
 
 
-cmd({
-  pattern: "fancy",
-  desc: "Apply fancy text styles",
-  category: "owner",
-  react: "💫",
-  filename: __filename
-},
-
-async (conn, mek, m, { from, args, reply, prefix }) => {
-
-  try {
-
-    const id = args[0]?.match(/\d+/)?.join('');
-    const text = args.slice(1).join(" ");
-
-    // No argument → Show list
-    if (!args.length) {
-      return reply(
-        `╭─ 「 *\`𝐅𝐀𝐍𝐂𝐘 𝐒𝐓𝐘𝐋𝐄\`* 」\n` +
-        `│ Example: ${prefix}fancy 10 YOU MD\n│\n` +
-        String.fromCharCode(8206).repeat(4001) +
-        fancy.list('YOU MD', fancy)
-      );
-    }
-
-    // Missing ID or text
-    if (!id || !text) {
-      return reply(
-        `Example: ${prefix}fancy 10 YOU MD\n\n` +
-        String.fromCharCode(8206).repeat(4001) +
-        fancy.list('YOU MD', fancy)
-      );
-    }
-
-    // Get style
-    const style = fancy[parseInt(id) - 1];
-
-    if (!style) {
-      return reply("❌ Style not found.");
-    }
-
-    // Apply style
-    const result = fancy.apply(style, text);
-
-    return reply(result);
-
-  } catch (e) {
-
-    console.log("FANCY ERROR:", e);
-    reply("❌ Error while generating fancy text.");
-
-  }
-
-});
 
 
 cmd({
