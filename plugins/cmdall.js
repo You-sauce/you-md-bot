@@ -3,7 +3,6 @@ const { downloadContentFromMessage } = require('@whiskeysockets/baileys');
 const axios = require('axios');
 const fs = require('fs');
 const Config = require('../config');
-const path = require('path');
 
 // ------------------ GETIMAGE ------------------
 cmd({
